@@ -1,0 +1,54 @@
+import React, { useState } from 'react';
+import { useSpring, animated } from 'react-spring';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import './styles.css';
+import tileData from './../../components/gym/tileData';
+import Iframe from 'react-iframe';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import LanguageIcon from '@material-ui/icons/Language';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import GymMap from './../../components/gym/GymMap';
+import './styles.css';
+
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      flexWrap: 'no-wrap',
+      flexDirection: 'row',
+      '& > *': {
+        margin: theme.spacing(10),
+        width: theme.spacing(70),
+        height: theme.spacing(80),
+        color: 'white',
+        background: 'lightgrey',
+        textAlign: 'left'
+      },
+    },
+  }));
+
+const GymDetails = ({match}) => {
+    const fade = useSpring({opacity: 1, from: {opacity: 0}, delay: 400})
+    const [data] = useState(tileData);
+    const currentGym = data.filter(gym => gym.title === match.params.id)
+    const classes = useStyles();
+
+    return (
+        <animated.div style={fade} className={classes.root}>
+            <Paper elevation={3}>
+                <div className='gymInfo'>
+                    <img className='gymImg' src={currentGym[0].img} alt={currentGym[0].title} />
+                    <h1>{match.params.id}</h1>
+                    {/* <p><span><LocationOnIcon/></span>{currentGym[0].address}</p> */}
+                    <p><span><LocationOnIcon/></span><a href={currentGym[0].location}>{currentGym[0].location}</a></p>
+                    <p><span><LanguageIcon/></span><a href={currentGym[0].website}>{currentGym[0].website}</a></p>
+                    <p><span><MailOutlineIcon/></span>{currentGym[0].email}</p>
+                </div>
+            </Paper>
+            <GymMap/>
+        </animated.div>
+    );
+}
+
+export default GymDetails;

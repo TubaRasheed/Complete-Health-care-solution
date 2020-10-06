@@ -1,0 +1,33 @@
+.color{
+    background-color: aliceblue;
+}
+.title {
+    font-size: 3.5em;
+    margin-top: 3em;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+h3 {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.MuiInputBase-input {
+    background: white !important;
+    width: 500px !important; 
+}
+
+.gymList {
+    padding: 100px;
+}
+
+@media screen and (max-width: 850px) {
+    .gymList {
+        padding: 20px;
+    }
+}
